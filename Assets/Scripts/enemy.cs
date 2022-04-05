@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class enemy : MonoBehaviour
 {
-    public int health = 20;
+    public int maxHealth = 20;
+    public int health;
     public float movementSpeed;
+    public Slider healthSlider;
     public GameObject waypointParent;
-    public Transform[] waypoints;
+    public Transform[] waypoints; 
 
     private int waypointIndex = 0;
     private Vector2 movementVec;
@@ -15,6 +18,7 @@ public class enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        health = maxHealth;
         // int i = 0;
         // foreach (Transform waypoint in waypointParent.transform) {
         //     if (!waypoint.gameObject.activeInHierarchy) {
@@ -44,12 +48,14 @@ public class enemy : MonoBehaviour
 
     public void takeDamage(int hit) {
         health -= hit;
-        Debug.Log("Enemy HP: " + health);
+        //Debug.Log("Enemy HP: " + health);
         if (health <= 0) {
-            FindObjectOfType<economy>().addCoins(6);
+            FindObjectOfType<economy>().addCoins(5);
             Debug.Log("Enemy Killed");
             Destroy(this.gameObject);
         }
+        
+        healthSlider.value = (float)health / (float)maxHealth;
     }
 
     void OnTriggerEnter2D(Collider2D col) {

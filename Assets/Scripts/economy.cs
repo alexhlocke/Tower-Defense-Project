@@ -21,6 +21,10 @@ public class economy : MonoBehaviour
         coins = 0;
         refreshCoinDisplay();
     }
+    
+    public int getCoins() {
+        return coins;
+    }
 
     private void refreshCoinDisplay() {
         coinsText.GetComponent<TMPro.TextMeshProUGUI>().text = "Coins: " + coins;
