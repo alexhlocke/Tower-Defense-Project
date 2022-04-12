@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class economy : MonoBehaviour
 {
-    public int coins = 0;
+    public int coins = 5;
     public GameObject coinsText;
     
     public void addCoins(int toBeAdded) {

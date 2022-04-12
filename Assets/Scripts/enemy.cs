@@ -11,6 +11,7 @@ public class enemy : MonoBehaviour
     public Slider healthSlider;
     public GameObject waypointParent;
     public Transform[] waypoints; 
+    public Transform endWaypoint;
 
     private int waypointIndex = 0;
     private Vector2 movementVec;
@@ -52,7 +53,8 @@ public class enemy : MonoBehaviour
         if (health <= 0) {
             FindObjectOfType<economy>().addCoins(5);
             Debug.Log("Enemy Killed");
-            Destroy(this.gameObject);
+            // Destroy(this.gameObject);
+            die();
         }
         
         healthSlider.value = (float)health / (float)maxHealth;
@@ -64,7 +66,17 @@ public class enemy : MonoBehaviour
                 Destroy(this.gameObject);
             }
             waypointIndex++;
-            Debug.Log("Waypoint: " + waypointIndex);
+            //Debug.Log("Waypoint: " + waypointIndex);
         }
+        if (waypointIndex > 3) {
+            FindObjectOfType<HealthManager>().loseHealth();
+            // Destroy(this.gameObject);
+            die();
+        }
+    }
+
+    private void die() {
+        FindObjectOfType<AudioManager>().playSound("enemy death");
+        Destroy(this.gameObject);
     }
 }

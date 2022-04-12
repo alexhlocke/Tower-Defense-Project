@@ -39,7 +39,7 @@ public class MouseTest : MonoBehaviour
     }
 
     void spawnTower(Transform spawnPoint) {
-        if (FindObjectOfType<economy>().getCoins() > 4) {
+        if (FindObjectOfType<economy>().getCoins() >= 4) {
             var newTower = Instantiate(towerPrefab);
             Vector3 newSpawnPos = spawnPoint.position;
             newSpawnPos.y += 0.6f;
